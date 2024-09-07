@@ -1,0 +1,75 @@
+/* body {
+    
+} */
+
+body {
+    background-image: url('https://lkdesignhotel.com.br/wp-content/uploads/2022/01/WK-ALTERACAO-4.2-4-scaled.jpg');
+    background-size: cover; /* Faz com que a imagem cubra toda a área do body */
+    background-position: center; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Evita que a imagem se repita */
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.logout-container {
+    position: absolute;
+    top: 20px; /* Ajuste conforme necessário */
+    right: 20px; /* Ajuste conforme necessário */
+}
+
+.logout-container button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #dc3545; /* Cor vermelha para logout */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.logout-container button:hover {
+    background-color: #c82333;
+}
+
+.container {
+    text-align: center;
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.button-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Define 4 colunas de igual largura */
+    gap: 20px; /* Espaçamento entre os botões */
+    justify-content: center; /* Centraliza o grid */
+}
+
+.button {
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: 16px;
+    color: white;
+    background-color: #252F3E;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    box-sizing: border-box; /* Inclui padding e border na largura total */
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
