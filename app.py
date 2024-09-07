@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 reports = get_valid_reports(get_session(environ['DATABASE_URL']))
+print(reports)
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
