@@ -7,8 +7,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-reports = get_valid_reports(get_session(environ['DATABASE_URL']))
-print(reports)
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
@@ -43,10 +41,12 @@ def logout():
 #Tela dos botões, escolha o relatório
 @app.route('/index', methods=['GET', 'POST'])
 def index():
+    
     if not session.get('logged_in'):
         return redirect(url_for('login'))
     else:
-            return render_template('index.html', reps=reports.keys()) 
+        reports = get_valid_reports(get_session(environ['DATABASE_URL']))
+        return render_template('index.html', reps=reports.keys()) 
 
 #Função base para renderizar o report escolhido
 @app.route('/<report>', methods=['GET', 'POST'])
@@ -55,8 +55,10 @@ def ficticio(report):
         return redirect(url_for('login'))
     else:
         try:
+            reports = get_valid_reports(get_session(environ['DATABASE_URL']))
             return render_template('base.html', rep=reports[report]) 
         except:
+            reports = get_valid_reports(get_session(environ['DATABASE_URL']))
             report_keys = reports.keys()
             return redirect(url_for('index', reps=list(report_keys)))
 
