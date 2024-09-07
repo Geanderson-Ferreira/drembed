@@ -21,6 +21,9 @@
 </style>
 </head>
 <body>
+
+    <button id="back-button" onclick="window.history.back()"><span>&lt; Voltar</button>
+
     <div class="logout-container">
         <form action="{{ url_for('logout') }}" method="post">
             <button type="submit">Logout</button>
