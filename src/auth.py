@@ -19,7 +19,7 @@ SessionFactory = sessionmaker(bind=engine)
 def auth(user_name, password):
     """
     Verifica as credenciais do usuário e registra o acesso se válido.
-    
+
     :param user_name: Nome do usuário.
     :param password: Senha do usuário.
     :return: True se as credenciais forem válidas, False caso contrário.
@@ -32,6 +32,7 @@ def auth(user_name, password):
         
         if user.password == password:
             session.commit()
+            register_user_access(user)
              # Confirma as alterações
             return True
         else:
@@ -40,5 +41,4 @@ def auth(user_name, password):
         return False
     finally:
           # Garante que a sessão seja fechada
-        register_user_access(user)
         session.close()

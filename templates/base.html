@@ -35,11 +35,13 @@
         <script>
 
            // Abre o URL em uma nova aba
-           window.open("{{ rep }}", "_blank");
+           
             // Redireciona para a página principal após um pequeno atraso
             setTimeout(function() {
                 window.location.href = "{{ url_for('index') }}";
             }, 1500); // Ajuste o tempo conforme necessário
+        
+            window.open("{{ rep }}", "_blank");
         </script>
     {% endif %}
 

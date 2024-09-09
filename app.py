@@ -19,6 +19,7 @@ def login():
 # Endpoint para Requisição de Login
 @app.route('/login', methods=['POST'])
 def do_login():
+
     username = request.form['username']
     password = request.form['password']
 
@@ -28,6 +29,7 @@ def do_login():
     else:
         flash('Incorreto ou não permitido.', 'danger')
         return redirect(url_for('login'))
+
 
 # Endpoint para Requisição de Logout
 @app.route('/logout', methods=['POST'])
