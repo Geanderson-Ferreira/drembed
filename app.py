@@ -59,6 +59,12 @@ def report(report):
             report_keys = iframe_dict.keys()
             return redirect(url_for('index', reps=list(report_keys)))
 
+@app.errorhandler(500)
+def handle_500_error(e):
+    
+    # Renderiza uma página personalizada ou redireciona para outra rota
+    return redirect(url_for('index', reps=[]))
+
 
 # Roda o server
 if __name__ == '__main__':

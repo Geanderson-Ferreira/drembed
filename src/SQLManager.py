@@ -12,7 +12,8 @@ engine = create_engine(
     DATABASE_URL,
     echo=False,
     pool_size=10,  # Número de conexões no pool
-    max_overflow=20  # Número máximo de conexões adicionais que o pool pode criar
+    max_overflow=20,
+    pool_recycle=1800  # Número máximo de conexões adicionais que o pool pode criar
 )
 Session = sessionmaker(bind=engine)
 
