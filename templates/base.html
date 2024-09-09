@@ -19,10 +19,9 @@
         border: none;
     }
 </style>
-</head>
 <body>
 
-    <button id="back-button" onclick="window.history.back()"> Voltar</button>
+    <button id="back-button" onclick="window.history.back()">Voltar</button>
 
     <div class="logout-container">
         <form action="{{ url_for('logout') }}" method="post">
@@ -30,7 +29,18 @@
         </form>
     </div>
 
-    {{ rep|safe }} 
- 
+    {% if rep_type == 'E' %}
+        {{ rep|safe }} 
+    {% else %}
+        <script>
+
+            window.open("{{ rep }}", "_blank");
+            window.location.href = "{{ url_for('index') }}";
+
+
+            // window.open("{{ rep }}", "_blank");
+        </script>
+    {% endif %}
+
 </body>
-<html/>
+</html>

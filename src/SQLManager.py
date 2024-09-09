@@ -5,11 +5,11 @@ from datetime import datetime
 from dotenv import load_dotenv
 
 load_dotenv()
-# # Definir a URL do banco de dados
-# DATABASE_URL = environ['DATABASE_URL']
+# Definir a URL do banco de dados
+DATABASE_URL = environ['DATABASE_URL']
 
-# # Criar a engine do banco de dados
-# engine = create_engine(DATABASE_URL, echo=False)
+# Criar a engine do banco de dados
+engine = create_engine(DATABASE_URL, echo=False)
 
 # Definir a base para as classes
 Base = declarative_base()
@@ -31,18 +31,21 @@ class Report(Base):
     report_name = Column(String(255), nullable=False)
     report_content = Column(Text, nullable=True)
     is_active = Column(Boolean, default=True, nullable=False)
+    rep_type = Column(String(255))
 
 # Criar as tabelas no banco de dados
 def create_tables():
     Base.metadata.create_all(engine)
 
 # Criar as tabelas
-# if __name__ == "__main__":
-#     create_tables()
+if __name__ == "__main__":
+    create_tables()
 
 
 def get_valid_reports(session):
     reports_dict = {}
+    reports_types = {}
+    li = list()
     try:
         # Consultar todos os relatórios ativos
         reports = session.query(Report).filter(Report.is_active == True).all()
@@ -50,8 +53,11 @@ def get_valid_reports(session):
         for report in reports:
             # Usar report_name como chave e report_content como valor
             reports_dict[report.report_name] = report.report_content
-        
-        return reports_dict
+            reports_types[report.report_name] = report.rep_type
+        li.append(reports_dict)
+        li.append(reports_types)
+
+        return li
     
     except Exception as e:
         print(f"Erro ao obter relatórios: {e}")

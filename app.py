@@ -45,21 +45,30 @@ def index():
         return redirect(url_for('login'))
     else:
         reports = get_valid_reports(get_session(environ['DATABASE_URL']))
-        return render_template('index.html', reps=reports.keys()) 
+        return render_template('index.html', reps=reports[0].keys()) 
 
 #Função base para renderizar o report escolhido
 @app.route('/<report>', methods=['GET', 'POST'])
-def ficticio(report):
+def report(report):
     if not session.get('logged_in'):
         return redirect(url_for('login'))
     else:
+
+        reports = get_valid_reports(get_session(environ['DATABASE_URL']))
+        iframe_dict = reports[0]
+        indicator_dict = reports[1]
+        
         try:
-            reports = get_valid_reports(get_session(environ['DATABASE_URL']))
-            return render_template('base.html', rep=reports[report]) 
+            return render_template('base.html', rep=iframe_dict[report], rep_type=indicator_dict[report]) 
         except:
-            reports = get_valid_reports(get_session(environ['DATABASE_URL']))
-            report_keys = reports.keys()
+            report_keys = iframe_dict.keys()
             return redirect(url_for('index', reps=list(report_keys)))
+
+@app.route('/rep-content')
+def render_rep_content():
+    rep = request.args.get('rep')  # Obtém o parâmetro 'rep' da URL
+    return render_template('rep_content.html', rep=rep)
+
 
 #Roda o serverpy
 if __name__ == '__main__':
