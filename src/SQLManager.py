@@ -8,7 +8,12 @@ load_dotenv()
 DATABASE_URL = environ['DATABASE_URL']
 
 # Criar a engine do banco de dados e configurar o Session
-engine = create_engine(DATABASE_URL, echo=False)
+engine = create_engine(
+    DATABASE_URL,
+    echo=False,
+    pool_size=10,  # Número de conexões no pool
+    max_overflow=20  # Número máximo de conexões adicionais que o pool pode criar
+)
 Session = sessionmaker(bind=engine)
 
 Base = declarative_base()

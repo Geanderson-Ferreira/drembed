@@ -1,11 +1,6 @@
 from flask import Flask, flash, render_template, request, redirect, url_for, session
 from src.auth import auth
 from src.SQLManager import get_valid_reports
-from os import environ
-
-from dotenv import load_dotenv
-
-load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
@@ -19,17 +14,19 @@ def login():
 # Endpoint para Requisição de Login
 @app.route('/login', methods=['POST'])
 def do_login():
-
     username = request.form['username']
     password = request.form['password']
 
-    if auth(username, password):
-        session['logged_in'] = True
-        return redirect(url_for('index'))
-    else:
-        flash('Incorreto ou não permitido.', 'danger')
+    try:
+        if auth(username, password):
+            session['logged_in'] = True
+            return redirect(url_for('index'))
+        else:
+            flash('Credenciais incorretas ou não permitidas.', 'danger')
+            return redirect(url_for('login'))
+    except Exception as e:
+        flash(f'Ocorreu um erro: {str(e)}', 'danger')
         return redirect(url_for('login'))
-
 
 # Endpoint para Requisição de Logout
 @app.route('/logout', methods=['POST'])
@@ -62,10 +59,6 @@ def report(report):
             report_keys = iframe_dict.keys()
             return redirect(url_for('index', reps=list(report_keys)))
 
-@app.route('/rep-content')
-def render_rep_content():
-    rep = request.args.get('rep')  # Obtém o parâmetro 'rep' da URL
-    return render_template('rep_content.html', rep=rep)
 
 # Roda o server
 if __name__ == '__main__':
