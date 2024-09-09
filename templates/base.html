@@ -32,17 +32,15 @@
     {% if rep_type == 'E' %}
         {{ rep|safe }} 
     {% else %}
-
-    <button id="openRepButton" hidden>Abrir Relatório</button>
-
-        <script>           
-            document.getElementById("openRepButton").addEventListener("click", function() {
-
-                window.open("{{ rep }}", "_blank");
+    
+        <script>
+           
+            // Redireciona para a página principal após um pequeno atraso
+            setTimeout(function() {
                 window.location.href = "{{ url_for('index') }}";
-            });
-
-        document.getElementById("openRepButton").click()
+            }, 1500); // Ajuste o tempo conforme necessário
+        
+            window.open("{{ rep }}", "_blank");
         </script>
     {% endif %}
 
