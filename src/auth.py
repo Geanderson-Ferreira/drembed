@@ -31,12 +31,14 @@ def auth(user_name, password):
         user = session.query(User).filter(User.user_name == user_name).one()
         
         if user.password == password:
-            register_user_access(user)
-            session.commit()  # Confirma as alterações
+            session.commit()
+             # Confirma as alterações
             return True
         else:
             return False
     except NoResultFound:
         return False
     finally:
-        session.close()  # Garante que a sessão seja fechada
+          # Garante que a sessão seja fechada
+        register_user_access(user)
+        session.close()
