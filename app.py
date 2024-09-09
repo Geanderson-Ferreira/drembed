@@ -25,7 +25,8 @@ def do_login():
             flash('Credenciais incorretas ou não permitidas.', 'danger')
             return redirect(url_for('login'))
     except Exception as e:
-        flash(f'Ocorreu um erro: {str(e)}', 'danger')
+        print(e)
+        flash(f'Credenciais incorretas ou não permitidas.', 'danger')
         return redirect(url_for('login'))
 
 # Endpoint para Requisição de Logout
