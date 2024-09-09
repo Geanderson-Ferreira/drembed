@@ -32,16 +32,17 @@
     {% if rep_type == 'E' %}
         {{ rep|safe }} 
     {% else %}
-        <script>
 
-           // Abre o URL em uma nova aba
-           
-            // Redireciona para a página principal após um pequeno atraso
-            setTimeout(function() {
+    <button id="openRepButton" hidden>Abrir Relatório</button>
+
+        <script>           
+            document.getElementById("openRepButton").addEventListener("click", function() {
+
+                window.open("{{ rep }}", "_blank");
                 window.location.href = "{{ url_for('index') }}";
-            }, 1500); // Ajuste o tempo conforme necessário
-        
-            window.open("{{ rep }}", "_blank");
+            });
+
+        document.getElementById("openRepButton").click()
         </script>
     {% endif %}
 
