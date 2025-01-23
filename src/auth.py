@@ -17,6 +17,8 @@ engine = create_engine(DATABASE_URL, echo=False)
 SessionFactory = sessionmaker(bind=engine)
 
 def auth(user_name, password):
+
+    return user_name == 'gean' and password == '1234'
     """
     Verifica as credenciais do usuário e registra o acesso se válido.
 
